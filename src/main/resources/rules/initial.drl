@@ -1,0 +1,23 @@
+package com.sergiuoltean.drools;
+
+rule 'not_ok'
+    salience 20
+    when
+        $ip: ImportProduct( status!="OK" )
+    then
+        delete( $ip );
+end
+
+rule "average"
+    salience 19
+    when
+       $categories: Object() from accumulate(ip: ImportProduct();
+                             collectSet(ip.getCategory()))
+       $category: String() from $categories
+       accumulate(ip : ImportProduct(category == $category);
+            $avgPrice: average(ip.getPrice()));
+    then
+        System.out.println("Category "+$category);
+        System.out.println("Price "+$avgPrice);
+        System.out.println("-------------------");
+end

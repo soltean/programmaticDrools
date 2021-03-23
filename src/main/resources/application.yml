@@ -1,0 +1,7 @@
+camel:
+  springboot.main-run-controller: true
+  dataformat.csv:
+    delimiter: ","
+    header-disabled: true
+server:
+  port: 9090
